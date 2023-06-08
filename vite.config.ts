@@ -4,7 +4,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/weight-tracker/",
+  // base: "/weight-tracker/",
   plugins: [vue()],
   resolve: {
     alias: {
