@@ -1,8 +1,10 @@
 <template>
   <section
-    class="h-44 w-44 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between select-none"
+    class="h-full w-full p-6 rounded-2xl border border-gray-200 flex flex-col justify-between select-none items-center"
   >
-    <h2 class="text-sm text-gray-400 font-semibold uppercase">{{ title }}</h2>
+    <h2 class="text-sm text-gray-400 font-semibold uppercase mb-2">
+      {{ title }}
+    </h2>
     <div class="flex flex-row items-end">
       <ph-arrow-down
         class="shrink-0"

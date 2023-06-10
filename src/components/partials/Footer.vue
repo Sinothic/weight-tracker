@@ -1,22 +1,19 @@
 <template>
   <footer
-    class="h-20 px-8 w-full bg-white flex flex-row sticky bottom-0 items-center justify-between"
+    class="h-18 px-8 w-full bg-white flex flex-row items-center justify-between"
   >
-    <ph-house
-      :size="30"
-      :color="getIconColor('home')"
-      @click="setSelectedIcon('home')"
-    />
+    <ph-house :size="30" :color="getIconColor('home')" @click="goTo('home')" />
     <ph-chart-bar
       :size="30"
       :color="getIconColor('trends')"
-      @click="setSelectedIcon('trends')"
+      @click="goTo('trends')"
     />
     <div
+      @click="goTo('add')"
       class="bg-white w-20 h-20 rounded-full flex flex-row justify-center items-center -translate-y-4"
     >
       <div
-        class="bg-orange-400 w-16 h-16 rounded-full flex flex-row justify-center items-center"
+        class="bg-orange-500 opacity-80 w-16 h-16 rounded-full flex flex-row justify-center items-center"
       >
         <ph-plus :size="30" color="#fff" />
       </div>
@@ -24,16 +21,19 @@
     <ph-clipboard
       :size="30"
       :color="getIconColor('history')"
-      @click="setSelectedIcon('history')"
+      @click="goTo('history')"
     />
     <ph-user
       :size="30"
       :color="getIconColor('profile')"
-      @click="setSelectedIcon('profile')"
+      @click="goTo('profile')"
     />
   </footer>
 </template>
 <script setup lang="ts">
+import { useRouter, useRoute } from "vue-router";
+
+const router = useRouter();
 import {
   PhHouse,
   PhChartBar,
@@ -41,27 +41,15 @@ import {
   PhClipboard,
   PhUser,
 } from "@phosphor-icons/vue";
-import { reactive } from "vue";
 
 const unselectedColor: string = "#9ca3af";
 const selectedColor: string = "#7e22ce";
-const colorMap: Record<string, string> = reactive({
-  home: selectedColor,
-  trends: unselectedColor,
-  history: unselectedColor,
-  profile: unselectedColor,
-});
 
 function getIconColor(path: string): string {
-  return colorMap[path] || unselectedColor;
+  return useRoute().path === `/${path}` ? selectedColor : unselectedColor;
 }
 
-function setSelectedIcon(path: string): void {
-  console.log(path);
-  Object.keys(colorMap).forEach((key) => {
-    debugger;
-    colorMap[key] = unselectedColor;
-  });
-  colorMap[path] = selectedColor;
+function goTo(path: string): void {
+  router.push({ path: `/${path}` });
 }
 </script>
