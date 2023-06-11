@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full">
     <div
-      class="semi-donut flex flex-row items-end justify-center"
+      class="semi-donut relative box-border flex flex-row items-end justify-center w-[80%] aspect-[2/1] overflow-hidden m-auto"
       :style="`--percentage: ${percentage};`"
     >
       <div class="flex flex-col items-center">
@@ -40,14 +40,6 @@ if (isGoalAchieved) {
 </script>
 <style scoped>
 .semi-donut {
-  width: 80%;
-  height: calc(70vw / 2);
-  position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin: auto;
-  /* border: 1px solid red; */
-
   --percentage: 0;
   --fill: rgb(249 115 22);
 }

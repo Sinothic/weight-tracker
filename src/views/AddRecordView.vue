@@ -9,6 +9,7 @@
     <div class="flex flex-row justify-between items-center gap-4">
       <ph-minus-circle :size="40" color="#94a3b8" @click="removeWeight" />
       <input
+        v-select-on-focus
         type="number"
         class="text-7xl font-medium w-5/6 text-center border-2 border-gray-200 rounded-xl py-3"
         v-model="weight"
@@ -57,7 +58,7 @@ function SaveWeight() {
     trend: "up",
   };
   storage.saveHistory(historyItem);
-  router.push("/history");
+  onGoBack();
 }
 
 function onGoBack() {
