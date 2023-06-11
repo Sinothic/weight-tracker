@@ -18,6 +18,16 @@ function getTargetWeight(): number {
   const targetWeight = localStorage.getItem("targetWeight");
   return targetWeight ? parseInt(targetWeight) : 0;
 }
+
+function getStartWeight(): HistoryItem | null {
+  const history = localStorage.getItem("history");
+  if (history) {
+    const parsedHistory = JSON.parse(history);
+    return parsedHistory[0];
+  }
+  return null;
+}
+
 function getHistory(): [] {
   const history = localStorage.getItem("history");
   return history ? JSON.parse(history) : [];
@@ -37,9 +47,10 @@ function saveHistory(historyItem: HistoryItem) {
 
 export const storage = {
   saveCurrentWeight,
-  getCurrentWeight,
   saveTargetWeight,
+  saveHistory,
+  getCurrentWeight,
   getTargetWeight,
   getHistory,
-  saveHistory,
+  getStartWeight,
 };

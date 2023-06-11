@@ -1,9 +1,7 @@
 <template>
-  <div
-    class="relative h-[calc(100vh-80px)] w-screen select-none overflow-y-auto"
-  >
-    <router-view class="h-full min-w-screen"></router-view>
-    <Footer class="absolute bottom-0" />
+  <div class="flex flex-col min-h-screen">
+    <router-view class="flex-1 bg-gray-50"></router-view>
+    <Footer class="fixed bottom-0 w-full" />
   </div>
 </template>
 <script setup lang="ts">

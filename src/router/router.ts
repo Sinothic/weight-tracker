@@ -4,6 +4,7 @@ import Trends from "@/views/TrendsView.vue";
 import History from "@/views/HistoryView.vue";
 import Profile from "@/views/ProfileView.vue";
 import AddRecord from "@/views/AddRecordView.vue";
+import SetGoal from "@/views/SetGoalView.vue";
 
 export const routes = [
   { path: "/", component: Home },
@@ -12,6 +13,7 @@ export const routes = [
   { path: "/history", component: History },
   { path: "/profile", component: Profile },
   { path: "/add", component: AddRecord },
+  { path: "/goal", component: SetGoal },
 ];
 
 export const router = createRouter({

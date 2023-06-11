@@ -2,21 +2,42 @@
   <div class="flex flex-col w-full">
     <div
       class="semi-donut flex flex-row items-end justify-center"
-      style="--percentage: 50"
+      :style="`--percentage: ${percentage};`"
     >
       <div class="flex flex-col items-center">
-        <strong class="text-7xl font-normal">75</strong>
-        <p>13 kg para o meu objetivo</p>
+        <strong class="text-6xl font-normal">{{ currentWeight }}</strong>
+        <p>{{ weightLeftToGoal.toFixed(2) }} kg para o meu objetivo</p>
       </div>
     </div>
     <div class="flex flex-row justify-between w-full py-2 px-6">
-      <p class="text-sm font-normal">77kg</p>
-      <p class="text-sm font-normal">70kg</p>
+      <p class="text-sm font-normal">{{ startWeight }} kg</p>
+      <p class="text-sm font-normal">{{ targeWeight || 0 }}kg</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { storage } from "@/services/storage";
+
+const startWeight = storage.getStartWeight()?.weight ?? 0;
+const targeWeight = storage.getTargetWeight();
+const currentWeight = storage.getCurrentWeight();
+
+const isGoalAchieved = currentWeight <= targeWeight;
+let weightLeftToGoal = (targeWeight - currentWeight) * -1;
+weightLeftToGoal = weightLeftToGoal < 0 ? 0 : weightLeftToGoal;
+
+let percentage = 0;
+if (isGoalAchieved) {
+  percentage = 100;
+} else if (currentWeight > startWeight) {
+  percentage = 0;
+} else {
+  percentage = Math.round(
+    ((startWeight - currentWeight) / (startWeight - targeWeight)) * 100
+  );
+}
+</script>
 <style scoped>
 .semi-donut {
   width: 80%;

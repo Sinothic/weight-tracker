@@ -1,5 +1,6 @@
 <template>
   <footer
+    v-if="isFooterVisible"
     class="h-18 px-8 w-full bg-white flex flex-row items-center justify-between"
   >
     <ph-house :size="30" :color="getIconColor('home')" @click="goTo('home')" />
@@ -32,6 +33,7 @@
 </template>
 <script setup lang="ts">
 import { useRouter, useRoute } from "vue-router";
+import { computed } from "vue";
 
 const router = useRouter();
 import {
@@ -44,6 +46,10 @@ import {
 
 const unselectedColor: string = "#9ca3af";
 const selectedColor: string = "#7e22ce";
+
+const isFooterVisible = computed(() => {
+  return !["/add", "/goal"].includes(useRoute().path);
+});
 
 function getIconColor(path: string): string {
   return useRoute().path === `/${path}` ? selectedColor : unselectedColor;
