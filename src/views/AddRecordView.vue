@@ -53,6 +53,7 @@ function removeWeight() {
 
 function SaveWeight() {
   const historyItem: HistoryItem = {
+    id: new Date().getTime().toString(),
     date: new Date().toDateString(),
     weight: weight.value,
     trend: "up",
