@@ -1,4 +1,5 @@
 export type HistoryItem = {
+  id: string;
   date: string;
   weight: number;
   trend: string;
@@ -33,6 +34,7 @@ function getHistory(): [] {
   return history ? JSON.parse(history) : [];
 }
 function saveHistory(historyItem: HistoryItem) {
+  historyItem.id = new Date().getTime().toString();
   const currentWeight = historyItem.weight;
   const history = localStorage.getItem("history");
   if (history) {
@@ -45,6 +47,17 @@ function saveHistory(historyItem: HistoryItem) {
   saveCurrentWeight(currentWeight);
 }
 
+function deleteHistoryItem(deleteHistoryItem: HistoryItem) {
+  const history = localStorage.getItem("history");
+  if (history) {
+    const parsedHistory = JSON.parse(history);
+    const newHistory = parsedHistory.filter(
+      (item: HistoryItem) => item.id !== deleteHistoryItem.id
+    );
+    localStorage.setItem("history", JSON.stringify(newHistory));
+  }
+}
+
 export const storage = {
   saveCurrentWeight,
   saveTargetWeight,
@@ -53,4 +66,5 @@ export const storage = {
   getTargetWeight,
   getHistory,
   getStartWeight,
+  deleteHistoryItem,
 };

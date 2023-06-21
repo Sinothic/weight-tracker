@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        red: "#AA2222",
+        wl: {
+          red: "#AA2222",
+        },
       },
     },
   },
